@@ -14,9 +14,15 @@ client.on("ready", () => {
 	scheduledText();
 });
 
+client.on("message", msg => {
+	if(msg.content === "!test"){
+		msg.reply("It me, the bot!")
+	}
+});
+
 function scheduledText(){
 	const job = schedule.scheduleJob(rule, function(){
-		client.channels.fetch('713394331737653331')
+		client.channels.fetch('810096035128803358')
 			.then(channel => {
 				channel.send("@everyone Kas žais šiandien?")
 				.then(sentMessage => {
