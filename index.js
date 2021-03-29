@@ -28,7 +28,7 @@ client.on("message", msg => {
 });
 
 function scheduledText(){
-	message.guild.channels.cache.find(channel => channel.name === "general").id
+	client.channels.cache.find(channel => channel.name === "general").id
 		.then(channel => {
 			channel.send("@everyone Kas žais šiandien?")
 				.then(sentMessage => {
