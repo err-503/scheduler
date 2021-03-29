@@ -10,6 +10,7 @@ rule.hour = 15;
 rule.minute = 0;
 
 const prefix = "!hu";
+var pollTime;
 
 client.on("ready", () => {
 	console.log("Bot online and active!");
@@ -19,23 +20,23 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-	if(msg.content === `${prefix} testpoll`){
+	if(msg.content === `${prefix} testpoll ${pollTime}`){
 		scheduledText();
 	}
 	if(msg.content === `${prefix} help`){
-		msg.reply("It's me, the hu? bot! Everyday, at 15:00 o'clock, I ask you if you want to play. Just mark your answer and after 3 hours I should give you the statistics!")
+		msg.reply("Tai aš, 'hu?' bot'as! Kiekvieną dieną 15:00, aš paklausiu, ar nori žaisti. Pažymėk savo atsakymą, ir po trijų valandų aš atsiųsiu statistiką!")
 	}
 });
 
 function scheduledText(){
-	client.channels.fetch('713394331737653331')
+	client.channels.fetch(process.env.CHANNEL)
 		.then(channel => {
 			channel.send("@everyone Kas žais šiandien?")
 				.then(sentMessage => {
 					sentMessage.react('✅');
 					sentMessage.react('❌');
 					const filter = (reaction, user) => reaction.emoji.name === '✅';
-					const collector = sentMessage.createReactionCollector(filter, { time: 10800000, dispose: true });
+					const collector = sentMessage.createReactionCollector(filter, { time: pollTime.toInt(), dispose: true });
 					var people = -1;
 					console.log(`zmones: ${people}`);
 					collector.on('collect', () => {
