@@ -10,7 +10,6 @@ rule.hour = 15;
 rule.minute = 0;
 
 const prefix = "!hu";
-var pollTime;
 
 client.on("ready", () => {
 	console.log("Bot online and active!");
@@ -20,7 +19,7 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-	if(msg.content === `${prefix} testpoll ${pollTime}`){
+	if(msg.content === `${prefix} testpoll`){
 		scheduledText();
 	}
 	if(msg.content === `${prefix} help`){
@@ -36,7 +35,7 @@ function scheduledText(){
 					sentMessage.react('✅');
 					sentMessage.react('❌');
 					const filter = (reaction, user) => reaction.emoji.name === '✅';
-					const collector = sentMessage.createReactionCollector(filter, { time: pollTime.toInt(), dispose: true });
+					const collector = sentMessage.createReactionCollector(filter, { time: 10800000, dispose: true });
 					var people = -1;
 					console.log(`zmones: ${people}`);
 					collector.on('collect', () => {
