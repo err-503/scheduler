@@ -9,6 +9,8 @@ rule.dayOfWeek = [0, new schedule.Range(0, 6)];
 rule.hour = 15;
 rule.minute = 0;
 
+const prefix = "!hu";
+
 client.on("ready", () => {
 	console.log("Bot online and active!");
 	const job = schedule.scheduleJob(rule, function(){
@@ -17,10 +19,10 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-	if(msg.content === "!hu_testpoll"){
+	if(msg.content === `${prefix} testpoll`){
 		scheduledText();
 	}
-	if(msg.content === "!hu_help"){
+	if(msg.content === `${prefix} help`){
 		msg.reply("It's me, the hu? bot! Everyday, at 15:00 o'clock, I ask you if you want to play. Just mark your answer and after 3 hours I should give you the statistics!")
 	}
 });
