@@ -38,7 +38,7 @@ client.on("message", msg => {
 		msg.channel.send(memes);
 	}
 	if(msg.content === `amogus drip`){
-		memes({video: {url: "https://cdn.discordapp.com/attachments/810096035128803358/824536054596894740/video0-8.mp4"}});
+		memes.video.url = "https://cdn.discordapp.com/attachments/810096035128803358/824536054596894740/video0-8.mp4";
 		msg.channel.send(memes);
 	}
 });
