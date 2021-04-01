@@ -54,8 +54,8 @@ function scheduledText(){
 					sentMessage.react('✅');
 					sentMessage.react('❌');
 					sentMessage.react('❔');
-					const filter = (reaction, user) => reaction.emoji.name === '✅';
-					const collectorYes = sentMessage.createReactionCollector(filter, { time: 10800001, dispose: true });
+					const filterYes = (reaction, user) => reaction.emoji.name === '✅';
+					const collectorYes = sentMessage.createReactionCollector(filterYes, { time: 10800001, dispose: true });
 					peopleYes = -1;
 					console.log(`zmones: ${peopleYes}`);
 					collectorYes.on('collect', () => {
@@ -78,8 +78,8 @@ function scheduledText(){
 								}
 							})
 					});
-					const filter = (reaction, user) => reaction.emoji.name === '❔';
-					const collectorMaybe = sentMessage.createReactionCollector(filter, { time: 10800000, dispose: true });
+					const filterMaybe = (reaction, user) => reaction.emoji.name === '❔';
+					const collectorMaybe = sentMessage.createReactionCollector(filterMaybe, { time: 10800000, dispose: true });
 					peopleMaybe = -1;
 					console.log(`zmones: ${peopleMaybe}`);
 					collectorMaybe.on('collect', () => {
