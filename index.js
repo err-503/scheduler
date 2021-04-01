@@ -11,18 +11,9 @@ rule.minute = 0;
 
 var peopleYes;
 var peopleMaybe;
-let memeImage;
-let memeVideo;
 
 const prefix = "!hu";
-const memes = {
-	video: {
-		url: memeVideo,
-	},
-	image: {
-		url: memeImage,
-	}
-};
+const memes = new Discord.MessageEmbed();
 
 client.on("ready", () => {
 	console.log("Bot online and active!");
@@ -39,22 +30,16 @@ client.on("message", msg => {
 		msg.reply("Tai aš, 'hu?' bot'as! Kiekvieną dieną 16:00, aš paklausiu, ar nori žaisti. Pažymėk savo atsakymą, ir po trijų valandų aš atsiųsiu statistiką!")
 	}
 	if(msg.content === `amogus` || msg.content === `sus`){
-		memeImage = "";
-		memeVideo = "";
-		memeImage = "https://static.wikia.nocookie.net/jerma-lore/images/e/e3/JermaSus.jpg/revision/latest?cb=20201206225609";
-		msg.channel.send({ embed: memes });
+		memes.setImage("https://static.wikia.nocookie.net/jerma-lore/images/e/e3/JermaSus.jpg/revision/latest?cb=20201206225609");
+		msg.channel.send(memes);
 	}
 	if(msg.content === `a m o g u s`){
-		memeImage = "";
-		memeVideo = "";
-		memeImage = "https://external-preview.redd.it/-fyP2iR_I19APf_9k7EFdND6wa_ir1bqDGG09729bT4.png?width=320&crop=smart&format=pjpg&auto=webp&s=96a7866a47ac43163aec1121a62bf63046427163";
-		msg.channel.send({ embed: memes });
+		memes.setImage("https://external-preview.redd.it/-fyP2iR_I19APf_9k7EFdND6wa_ir1bqDGG09729bT4.png?width=320&crop=smart&format=pjpg&auto=webp&s=96a7866a47ac43163aec1121a62bf63046427163");
+		msg.channel.send(memes);
 	}
 	if(msg.content === `amogus drip`){
-		memeImage = "";
-		memeVideo = "";
-		memeVideo = "https://cdn.discordapp.com/attachments/810096035128803358/824536054596894740/video0-8.mp4";
-		msg.channel.send({ embed: memes });
+		memes.setImage("https://cdn.discordapp.com/attachments/810096035128803358/824536054596894740/video0-8.mp4");
+		msg.channel.send(memes);
 	}
 });
 
