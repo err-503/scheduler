@@ -15,7 +15,7 @@ let memeImage;
 let memeVideo;
 
 const prefix = "!hu";
-const memes = new Discord.MessageEmbed() = {
+const memes = {
 	video: {
 		url: memeVideo,
 	},
@@ -42,19 +42,19 @@ client.on("message", msg => {
 		memeImage = "";
 		memeVideo = "";
 		memeImage = "https://static.wikia.nocookie.net/jerma-lore/images/e/e3/JermaSus.jpg/revision/latest?cb=20201206225609";
-		msg.channel.send(memes);
+		msg.channel.send({ embed: memes });
 	}
 	if(msg.content === `a m o g u s`){
 		memeImage = "";
 		memeVideo = "";
 		memeImage = "https://external-preview.redd.it/-fyP2iR_I19APf_9k7EFdND6wa_ir1bqDGG09729bT4.png?width=320&crop=smart&format=pjpg&auto=webp&s=96a7866a47ac43163aec1121a62bf63046427163";
-		msg.channel.send(memes);
+		msg.channel.send({ embed: memes });
 	}
 	if(msg.content === `amogus drip`){
 		memeImage = "";
 		memeVideo = "";
 		memeVideo = "https://cdn.discordapp.com/attachments/810096035128803358/824536054596894740/video0-8.mp4";
-		msg.channel.send(memes);
+		msg.channel.send({ embed: memes });
 	}
 });
 
