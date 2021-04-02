@@ -11,6 +11,9 @@ rule.minute = 0;
 
 var peopleYes;
 var peopleMaybe;
+var firstT;
+var secondT;
+var thirdT;
 
 const prefix = "!hu";
 const memes = new Discord.MessageEmbed();
@@ -45,11 +48,14 @@ client.on("message", msg => {
 function scheduledText(){
 	client.channels.fetch(process.env.CHANNEL)
 		.then(channel => {
-			channel.send("@Nuolatinis Kas žais šiandien?")
+			channel.send("@Nuolatinis Kas žais šiandien? (Laikai: 1️⃣ - 19:00; 2️⃣ - 20:00; 3️⃣ - 21:00)")
 				.then(sentMessage => {
 					sentMessage.react('✅');
 					sentMessage.react('❌');
 					sentMessage.react('❔');
+					sentMessage.react('1️⃣')
+					sentMessage.react('2️⃣')
+					sentMessage.react('3️⃣')
 					const filterYes = (reaction, user) => reaction.emoji.name === '✅';
 					const collectorYes = sentMessage.createReactionCollector(filterYes, { time: 10800001, dispose: true });
 					peopleYes = -1;
@@ -73,7 +79,19 @@ function scheduledText(){
 									channel.send("Teks daryt dvi komandas!");
 								}
 							})
+							.then(() =>{
+								if(firstT > secondT && firstT > thirdT){
+									channel.send("Daugiausia žmonių nori žaisti 19 valandą.");
+								} else if(secondT > firstT && secondT > thirdT){
+									channel.send("Daugiausia žmonių nori žaisti 20 valandą.");
+								} else if(thirdT > firstT && thirdT > secondT) {
+									channel.send("Daugiausia žmonių nori žaisti 21 valandą.");
+								} else {
+									channel.send("Niekas nebalsavo už jokį laiką!");
+								}
+							})
 					});
+
 					const filterMaybe = (reaction, user) => reaction.emoji.name === '❔';
 					const collectorMaybe = sentMessage.createReactionCollector(filterMaybe, { time: 10800000, dispose: true });
 					peopleMaybe = -1;
@@ -85,6 +103,36 @@ function scheduledText(){
 					collectorMaybe.on('remove', () => {
 						peopleMaybe = peopleMaybe - 1;
 						console.log(`zmones: ${peopleMaybe}`);
+					});
+
+					const filterFT = (reaction, user) => reaction.emoji.name === '1️⃣';
+					const collectorFT = sentMessage.createReactionCollector(filterFT, { time: 10800000, dispose: true });
+					firstT = -1;
+					collectorFT.on('collect', () => {
+						firstT = firstT + 1;
+					});
+					collectorFT.on('remove', () => {
+						firstT = firstT - 1;
+					});
+
+					const filterST = (reaction, user) => reaction.emoji.name === '2️⃣';
+					const collectorST = sentMessage.createReactionCollector(filterST, { time: 10800000, dispose: true });
+					secondT = -1;
+					collectorST.on('collect', () => {
+						secondT = secondT + 1;
+					});
+					collectorST.on('remove', () => {
+						secondT = secondT - 1;
+					});
+
+					const filterTT = (reaction, user) => reaction.emoji.name === '3️⃣';
+					const collectorTT = sentMessage.createReactionCollector(filterTT, { time: 10800000, dispose: true });
+					thirdT = -1;
+					collectorTT.on('collect', () => {
+						thirdT = thirdT + 1;
+					});
+					collectorTT.on('remove', () => {
+						thirdT = thirdT - 1;
 					});
 				});
 		});
