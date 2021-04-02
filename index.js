@@ -15,6 +15,8 @@ var firstT;
 var secondT;
 var thirdT;
 
+let roleID = 826798617457065986;
+
 const prefix = "!hu";
 const memes = new Discord.MessageEmbed();
 
@@ -48,7 +50,7 @@ client.on("message", msg => {
 function scheduledText(){
 	client.channels.fetch(process.env.CHANNEL)
 		.then(channel => {
-			channel.send("@Nuolatinis Kas žais šiandien? (Laikai: 1️⃣ - 19:00; 2️⃣ - 20:00; 3️⃣ - 21:00)")
+			channel.send(`<@&${roleID}> Kas žais šiandien? (Laikai: 1️⃣ - 19:00; 2️⃣ - 20:00; 3️⃣ - 21:00)`)
 				.then(sentMessage => {
 					sentMessage.react('✅');
 					sentMessage.react('❌');
