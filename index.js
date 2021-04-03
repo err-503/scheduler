@@ -87,7 +87,7 @@ function scheduledText(){
 								} else if(thirdT > firstT && thirdT > secondT) {
 									channel.send("Daugiausia žmonių nori žaisti 21 valandą.");
 								} else {
-									channel.send("Niekas nebalsavo už jokį laiką!");
+									channel.send("Dėl laiko nebuvo susitarta!");
 								}
 							})
 					});
